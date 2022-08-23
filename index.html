@@ -17,23 +17,23 @@
 
 <div class="main container p-3 mb-2 bg-success text-white">
     <div class="row">
-        <div class="mx-auto text-center fs-1" style="width: 200px;">
-            <i class="bi bi-wallet-fill"></i>
-        </div>
+            <img class="wallet" src="img/wallet.png">
     </div>
     <div class="row">
         <div class="mx-auto text-center border border-white m-3 p-3" style="width: 400px;">
-            Możeszs jeszcze wydać.... tu będzie JS
+            <span id="rest-sum">Możesz jeszcze wydać.... tu będzie JS</span>
         </div>
     </div>
     <div class="row">
         <div class="col border border-white pt-3">PRZYCHODY
             <div class="row border-bottom border-white">
-                <div class="col mt-3 mb-3"><input type="text" class="form-control" placeholder="Nazwa przychodu" aria-label="Nazwa-przychodu" aria-describedby="addon-wrapping"></div>
-                <div class="col mt-3 mb-3"><input type="number" class="form-control" placeholder="Kwota" aria-label="Kwota" aria-describedby="addon-wrapping"></div>
-                <div class="col mt-3 mb-3"><button type="button" class="btn btn-outline-light">Dodaj JS</button></div>  
+                <form id="income-form">
+                <div class="col mt-3 mb-3"><input id="name-input" type="text" class="form-control" placeholder="Nazwa przychodu" aria-label="Nazwa-przychodu" aria-describedby="addon-wrapping"></div>
+                <div class="col mt-3 mb-3"><input id="amount-input" type="number" class="form-control" placeholder="Kwota" aria-label="Kwota" aria-describedby="addon-wrapping"></div>
+                <div class="col mt-3 mb-3"><input id="add-btn" type="submit" class="btn btn-outline-light">Dodaj JS</input></div>  
+                </form>
             </div>
-            <ul class="unordered-list">
+            <ul class="unordered-list" id="un-list-in">
                 <div class="row">
                     <li class="col mt-3 mb-3">Pensja</li>
                     <div class="col mt-3 mb-3"><button type="button" class="btn btn-outline-light">Edytuj</button></div>
@@ -51,7 +51,7 @@
                 </div>
             </ul>
             <div class="row">
-                <div class="col mb-3 mt-5 pt-5">Suma przychodów JS</div>
+                <div class="col mb-3 mt-5 pt-5"><span id="sum-income">Suma przychodów JS</span></div>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                 <div class="col mt-3 mb-3"><input type="number" class="form-control" placeholder="Kwota" aria-label="Kwota" aria-describedby="addon-wrapping"></div>
                 <div class="col mt-3 mb-3"><button type="button" class="btn btn-outline-light">Dodaj JS</button></div>  
             </div>
-            <ul class="list-group">
+            <ul class="list-group" id="un-list-exp">
             <div class="row">
                 <li class="list-group-item col mt-3 mb-3">Rachunki</li>
                 <div class="col mt-3 mb-3"><button type="button" class="btn btn-outline-light">Edytuj</button></div>
@@ -80,7 +80,7 @@
             </div>
             </ul>
             <div class="row">
-            <div class="col mb-3 mt-5 pt-5">Suma wydatków JS</div>
+            <div class="col mb-3 mt-5 pt-5"><span id="sum-Expense">Suma wydatków JS</span></div>
             </div>
         </div>
 

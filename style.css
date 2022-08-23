@@ -6,3 +6,9 @@
 .bi-wallet-fill {
     font-size: 100px;
 }
+
+.wallet {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
