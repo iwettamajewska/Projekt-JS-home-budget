@@ -10,7 +10,7 @@ const income = [];
 // let editList = document.querySelector('')
 
 
-incomeForm.addEventListener("submit", function (event) {
+incomeForm.addEventListener("submit", function(event) {
   event.preventDefault();
   let addItems = {
     name: nameIncome.value,
@@ -45,24 +45,42 @@ function addIncomeList() {
       unorderedListin.appendChild(li);
 
 
+      editButton.addEventListener('click', editTask);
+}) 
+
+}
 
 
-    });
-  }
 
 
+  //     editButton.addEventListener('click', function() {
+  //     editButton.innerHTML = '<button class="save-button">Zapisz</button>';
+  //
+      
 
-  
-
-editButton.addEventListener('click', function() {
-    let editButton = document.querySelector("edit-btn");
-    editButton.innerHTML = <button>Zapisz</button>;
+    function createModal() {
+        const modal = document.createElement('span');
+        modal.classList.add('span-editable-modal');
+        const modalInput = document.createElement('input');
+        modalInput.classList.add('input-editable-modal');
+        const modalText = event.target.textContent;
+        modalInput.value = modalText;
+        const saveButton = document.createElement('button');
+        saveButton.classList.add('save-btn')
+        saveButton.textContent = 'Zapisz';
+        modal.appendChild(modalInput);
+        modal.appendChild(saveButton);
+        return modal;
+      }
 
        
-       
-    })
 
-  
+      function editTask(event) {
+        const modal = createModal();
+        event.li.appendChild(modal);
+      }
+
+      
 
 
 
