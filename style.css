@@ -12,3 +12,29 @@
     height: 100px;
     object-fit: contain;
 }
+
+
+.li-btn {
+    background-color: blue;
+    margin: 0px;
+}
+
+
+.text-in-list {
+    color:brown;
+}
+
+
+/* .text-in-lis {
+    width: 50%;
+} */
+
+/* .unordered-list {
+    display: flex;
+    justify-content: space-between;
+} */
+
+/* .li-btn {
+    display: flex;
+    justify-content: space-between;
+} */
