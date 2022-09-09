@@ -15,14 +15,31 @@
 
 
 .li-btn {
-    background-color: blue;
-    margin: 0px;
+    background-color: rgb(211, 211, 247);
 }
 
 
 .text-in-list {
     color:brown;
 }
+
+
+
+.li-income {
+    display: flex;
+    justify-content: space-between;
+}
+
+.boxButtons {
+    display: flex;
+    justify-content:flex-end;
+    gap: 10px;
+}
+
+.display-none {
+   display: none; 
+}
+
 
 
 /* .text-in-lis {
