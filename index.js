@@ -64,18 +64,20 @@ function addIncomeList() {
       unorderedListin.appendChild(li);
 
 
-      editButton.addEventListener('click', editTask);
+      
+      // editButton.addEventListener('click', editTask);
+        editButton.addEventListener('click', function() {
+        editButton.remove();
+        editButton.classList.add('display-none');
+        deleteButton.classList.add('display-none');
+        saveButton.classList.remove('display-none');
+        canceleButton.classList.remove('display-none');
+     });
 }) 
 
 }
       // NOWE:
-      editButton.addEventListener('click', function() {
-      editButton.remove();
-      editButton.classList.add('display-none');
-      deleteButton.classList.add('display-none');
-      saveButton.classList.remove('display-none');
-      canceleButton.classList.remove('display-none');
-   });
+      
 
 
 
