@@ -71,7 +71,7 @@ function addIncomeList() {
         editButton.classList.add('display-none');
         deleteButton.classList.add('display-none');
         saveButton.classList.remove('display-none');
-        canceleButton.classList.remove('display-none');
+        cancelButton.classList.remove('display-none');
      });
 }) 
 
@@ -120,6 +120,28 @@ function addIncomeList() {
   //       editButton.classList.add("save-btn");
   //     })
   // });
+
+
+
+
+
+
+
+
+
+
+// NOTATKI DO SUMOWANIA 24.09:
+
+// const sumInc = sumFn(przychody);
+// console.log("tuZZ", sumInc);
+
+
+// function sumFn(income ) {
+//   return income .reduce(
+//     (previusValue, currentValue) => previusValue + currentValue,
+//     0,);
+// }
+
 
 
 
