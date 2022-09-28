@@ -19,12 +19,12 @@ incomeForm.addEventListener("submit", function(event) {
   };
   income.push(addItems);
 
-  addIncomeList(); //<= dlaczego ta linijka? nie wystarczyłoby tylko to co na dole w 22 linijce, czyli function addIncomeList() ??
+  addIncomeList();
   
 });
 
 function addIncomeList() {
-    unorderedListin.innerText = ""; //dlaczego to się czyści na początku?
+    unorderedListin.innerText = "";
 
     income.forEach((item) => {
       const li = document.createElement("li");
@@ -32,17 +32,26 @@ function addIncomeList() {
       const editButton = document.createElement("button");
       const deleteButton = document.createElement("button");
       editButton.textContent = "Edytuj";
-      editButton.classList.add('edit-btn', 'li-btn');
+      editButton.classList.add('edit-btn', 'li-btn', 'btn', 'btn-outline-light');
       deleteButton.textContent = "Usuń";
-      deleteButton.classList.add('delete-btn', 'li-btn');
-      const span = document.createElement("span");
-      span.textContent = `${item.name} : ${item.amount} zł`;
-      span.classList.add('text-in-list');
-      li.appendChild(span);
-      // li.appendChild(editButton);
-      // li.appendChild(deleteButton);
+      deleteButton.classList.add('delete-btn', 'li-btn', 'btn', 'btn-outline-light');
+      // const span = document.createElement("span");
+      // span.textContent = `${item.name} : ${item.amount} zł`;
+      // span.classList.add('text-in-list');
+      // li.appendChild(span);
+      let itemName = document.createElement('span');
+      itemName.classList.add('item-name');
+      let itemNameValue = document.createElement('span');
+      itemNameValue.classList.add('item-name-value');
+      itemName.textContent = `${item.name}`;
+      itemNameValue.textContent = `${item.amount} `;
+      let currency = document.createElement('span');
+      currency.classList.add('currency');
+      currency.textContent = `zł`;
+      li.appendChild(itemName);
+      li.appendChild(itemNameValue);
+      li.appendChild(currency);
 
-      // NOWE 45-61, zakomentowalam 42-43. Po tych kodach znika mi bullet point:
       const boxForButtons = document.createElement("span");
       boxForButtons.classList.add("boxButtons");
       li.appendChild(boxForButtons);
@@ -54,9 +63,9 @@ function addIncomeList() {
       const saveButton = document.createElement('button');
       const cancelButton = document.createElement('button');
       saveButton.textContent = "Zapisz";
-      saveButton.classList.add('save-btn', 'li-btn', 'display-none');
+      saveButton.classList.add('save-btn', 'li-btn', 'display-none', 'btn', 'btn-outline-light');
       cancelButton.textContent = "Anuluj";
-      cancelButton.classList.add('cancel-btn', 'li-btn', 'display-none');
+      cancelButton.classList.add('cancel-btn', 'li-btn', 'display-none', 'btn', 'btn-outline-light');
       boxForButtons.appendChild(saveButton);
       boxForButtons.appendChild(cancelButton);
 
@@ -64,24 +73,91 @@ function addIncomeList() {
       unorderedListin.appendChild(li);
 
 
-      
-      // editButton.addEventListener('click', editTask);
-        editButton.addEventListener('click', function() {
-        editButton.remove();
-        editButton.classList.add('display-none');
-        deleteButton.classList.add('display-none');
-        saveButton.classList.remove('display-none');
-        cancelButton.classList.remove('display-none');
-     });
-}) 
+      editButton.addEventListener("click", function () {
+        editButton.classList.add("display-none");
+        deleteButton.classList.add("display-none");
+        saveButton.classList.remove("display-none");
+        cancelButton.classList.remove("display-none");
+        itemName.setAttribute('contenteditable', 'true');
+        itemNameValue.setAttribute('contenteditable', 'true');
+      });
+  
 
-}
+
+
+      saveButton.addEventListener("click", function () {
+        editButton.classList.remove("display-none");
+        deleteButton.classList.remove("display-none");
+        saveButton.classList.add("display-none");
+        cancelButton.classList.add("display-none");
+        itemName.setAttribute('contenteditable', 'false');
+        itemNameValue.setAttribute('contenteditable', 'false');
+      });
+
+
+      // let editButtonOnClick = document.createAttribute("onclick");
+      // editButtonOnClick.value = "editItem(this)";
+      // editButton.setAttributeNode(editButtonOnClick);
+  
+      cancelButton.addEventListener("click", function () {
+        editButton.classList.remove("display-none");
+        deleteButton.classList.remove("display-none");
+        saveButton.classList.add("display-none");
+        cancelButton.classList.add("display-none");
+      });
+  
+      let deleteButtonOnClick = document.createAttribute("onclick");
+      deleteButtonOnClick.value = "deleteItem(this)";
+      deleteButton.setAttributeNode(deleteButtonOnClick);
+    });
+  }
+  
+
+  function deleteItem(item) {
+    item.parentNode.parentNode.remove();
+    // income.pop();
+  }
+
+  function editItem(item) {
+  
+  }
+
+  // let sumInc = 0;
+
+  // let incomeSum = income.reduce((acc, itemNameValue) => {
+  //   return acc + itemNameValue;
+  // }, 0);
+  // let sumIncome = document.querySelector('#sum-income');
+  // sumIncome.innerText = `Suma przychodów ${+} zł.`
+
+
+
+
+
+
+
+
+
+
+//   function blabla() {
+//  let incomeSum = income.reduce((acc, itemNameValue) => {
+//     return acc + itemNameValue;
+//   }, 0);
+
+//   console.log(incomeSum);
+
+//   let sumIncome = document.querySelector('#sum-income');
+//   sumIncome.appendChild(incomeSum);
+// }
+
+
+  // itemNameValue.textContent = `${item.amount} `;
+
+
+
+
       // NOWE:
       
-
-
-
-
     // function createModal() {
     //     modal.classList.add('span-editable-modal');
     //     const modalInput = document.createElement('input');
@@ -123,13 +199,6 @@ function addIncomeList() {
 
 
 
-
-
-
-
-
-
-
 // NOTATKI DO SUMOWANIA 24.09:
 
 // const sumInc = sumFn(przychody);
@@ -141,8 +210,6 @@ function addIncomeList() {
 //     (previusValue, currentValue) => previusValue + currentValue,
 //     0,);
 // }
-
-
 
 
 
