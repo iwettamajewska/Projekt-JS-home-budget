@@ -1,13 +1,14 @@
-let nameIncome = document.querySelector("#name-input");
-let amountCost = document.querySelector("#amount-input");
-let sumIncomeExpense = document.querySelector("#add-btn");
+let nameIncome = document.querySelector(".name-input");
+let amountCost = document.querySelector(".amount-input");
+let sumIncomeExpense = document.querySelector(".add-btn");
 let restSum = document.querySelector("#rest-sum");
 let unorderedListin = document.querySelector("#un-list-in");
 let unorderedListexp = document.querySelector("#un-list-exp");
 let incomeForm = document.querySelector("#income-form");
-const income = [];
+let income = [];
+let expense = [];
 
-// let editList = document.querySelector('')
+
 
 
 incomeForm.addEventListener("submit", function(event) {
@@ -18,6 +19,7 @@ incomeForm.addEventListener("submit", function(event) {
     id: Math.random(),
   };
   income.push(addItems);
+  expense.push(addItems)
 
   addIncomeList();
   
@@ -35,10 +37,6 @@ function addIncomeList() {
       editButton.classList.add('edit-btn', 'li-btn', 'btn', 'btn-outline-light');
       deleteButton.textContent = "Usuń";
       deleteButton.classList.add('delete-btn', 'li-btn', 'btn', 'btn-outline-light');
-      // const span = document.createElement("span");
-      // span.textContent = `${item.name} : ${item.amount} zł`;
-      // span.classList.add('text-in-list');
-      // li.appendChild(span);
       let itemName = document.createElement('span');
       itemName.classList.add('item-name');
       let itemNameValue = document.createElement('span');
@@ -68,7 +66,7 @@ function addIncomeList() {
       cancelButton.classList.add('cancel-btn', 'li-btn', 'display-none', 'btn', 'btn-outline-light');
       boxForButtons.appendChild(saveButton);
       boxForButtons.appendChild(cancelButton);
-
+      calculateSum();
 
       unorderedListin.appendChild(li);
 
@@ -80,10 +78,9 @@ function addIncomeList() {
         cancelButton.classList.remove("display-none");
         itemName.setAttribute('contenteditable', 'true');
         itemNameValue.setAttribute('contenteditable', 'true');
+        calculateSum();
       });
   
-
-
 
       saveButton.addEventListener("click", function () {
         editButton.classList.remove("display-none");
@@ -92,18 +89,17 @@ function addIncomeList() {
         cancelButton.classList.add("display-none");
         itemName.setAttribute('contenteditable', 'false');
         itemNameValue.setAttribute('contenteditable', 'false');
+        income = income.map((element) => element.id === item.id ? {...element, name: itemName.textContent, amount: itemNameValue.textContent} : element);
+        calculateSum();
       });
 
-
-      // let editButtonOnClick = document.createAttribute("onclick");
-      // editButtonOnClick.value = "editItem(this)";
-      // editButton.setAttributeNode(editButtonOnClick);
   
       cancelButton.addEventListener("click", function () {
         editButton.classList.remove("display-none");
         deleteButton.classList.remove("display-none");
         saveButton.classList.add("display-none");
         cancelButton.classList.add("display-none");
+        // calculateSum();
       });
   
       let deleteButtonOnClick = document.createAttribute("onclick");
@@ -122,41 +118,51 @@ function addIncomeList() {
   
   }
 
-  // let sumInc = 0;
-
-  // let incomeSum = income.reduce((acc, itemNameValue) => {
-  //   return acc + itemNameValue;
-  // }, 0);
-  // let sumIncome = document.querySelector('#sum-income');
-  // sumIncome.innerText = `Suma przychodów ${+} zł.`
 
 
-
-
-
+ 
+  function calculateSum() {
+  let incomeSum = income.reduce((acc, item) => {
+  return Number(acc) + Number(item.amount);
+  }, 0);
+  document.getElementById("sum-income").innerHTML =  incomeSum;
+  }
+calculateSum();
 
 
 
 
+// te wartosci sa 'na niby' - to taki mój szkic na następne kroki:
 
-//   function blabla() {
-//  let incomeSum = income.reduce((acc, itemNameValue) => {
-//     return acc + itemNameValue;
+// function calculateSumExpense() {
+//   let expensSum = outcome.reduce((acc, item) => {
+//   return Number(acc) + Number(item.amount);
 //   }, 0);
+//   document.getElementById("sum-income").innerHTML =  expenseSum;
+//   }
+//   calculateSumExpense();
 
-//   console.log(incomeSum);
+// let difference = calculateSum - calculateSumExpense;
 
-//   let sumIncome = document.querySelector('#sum-income');
-//   sumIncome.appendChild(incomeSum);
-// }
+// const showText() {
+//  if (calculateSum > expenseSum) {
+//    “Możesz jeszcze wydać {difference.value} złotych”.
+//  } elsfe if (calculateSum && expenseSum === 0) {
+//    “Bilans wynosi zero”
+//  } else if (difference < 0) {
+//    “Bilans jest ujemny. Jesteś na minusie XXX złotych”.
+//  }
+//  document.getElementById("rest-sum").innerHTML =  incomeSum;
+// } 
 
 
-  // itemNameValue.textContent = `${item.amount} `;
 
 
 
 
-      // NOWE:
+
+
+   /// zrob sobie z tego notatkę:
       
     // function createModal() {
     //     modal.classList.add('span-editable-modal');
@@ -174,60 +180,4 @@ function addIncomeList() {
 
        
 
-    //   function editTask(event) {
-    //     const modal = createModal();
-    //     event.li.appendChild(modal);
-    //   }
 
-      
-
-
-
-
-
-  //   let saveButton = document.querySelector(".edit-btn");
-
-
-
-  //   document.addEventListener("DOMContentLoaded", function() {
-  //     let editButton = document.querySelector(".edit-btn");
-
-  //     myBtn.addEventListener("click", function() {
-  //       editButton.classList.add("save-btn");
-  //     })
-  // });
-
-
-
-// NOTATKI DO SUMOWANIA 24.09:
-
-// const sumInc = sumFn(przychody);
-// console.log("tuZZ", sumInc);
-
-
-// function sumFn(income ) {
-//   return income .reduce(
-//     (previusValue, currentValue) => previusValue + currentValue,
-//     0,);
-// }
-
-
-
-
-
-// editButton.addEventListener('click', functiom () {
-// let zzzdsgdg = document.querySelector('wallet')
-
-//   });
- 
-
-
-// Dlaczego li dodają się w poziomie a nie pionie?
-
-
-// do czego się odnosi? nie ma zmiennych i klas.
-// dlaczego math.random?
-//   name: nameIncome.value,
-//   amount: amountCost.value,
-//   id: Math.random(),
-  
