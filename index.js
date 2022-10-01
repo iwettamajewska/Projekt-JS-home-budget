@@ -69,7 +69,8 @@ function addIncomeList() {
       calculateSum();
 
       unorderedListin.appendChild(li);
-
+      const itemNameAmount = itemNameValue.textContent;
+      const itemNameVal = itemName.textContent;
 
       editButton.addEventListener("click", function () {
         editButton.classList.add("display-none");
@@ -95,23 +96,36 @@ function addIncomeList() {
 
   
       cancelButton.addEventListener("click", function () {
+        
         editButton.classList.remove("display-none");
         deleteButton.classList.remove("display-none");
         saveButton.classList.add("display-none");
         cancelButton.classList.add("display-none");
-        // calculateSum();
+        itemName.setAttribute('contenteditable', 'false');
+        itemNameValue.setAttribute('contenteditable', 'false');
+        itemName.textContent = itemNameVal;
+        itemNameValue.textContent = itemNameAmount;
       });
   
-      let deleteButtonOnClick = document.createAttribute("onclick");
-      deleteButtonOnClick.value = "deleteItem(this)";
-      deleteButton.setAttributeNode(deleteButtonOnClick);
+      deleteButton.addEventListener("click", 
+        (event) =>
+        deleteItem(item, event)
+      );
+
+      // let deleteButtonOnClick = document.createAttribute("onclick");
+      // deleteButtonOnClick.value = "deleteItem(this)";
+      // deleteButton.setAttributeNode(deleteButtonOnClick);
     });
   }
   
 
-  function deleteItem(item) {
-    item.parentNode.parentNode.remove();
-    // income.pop();
+  function deleteItem(item, event) {
+  //  item.parentNode.parentNode.remove();
+    event.preventDefault();
+    console.log(item);
+    income = income.filter((element) => element.id !== item.id);
+    addIncomeList();
+    calculateSum();
   }
 
   function editItem(item) {
@@ -119,7 +133,7 @@ function addIncomeList() {
   }
 
 
-
+  
  
   function calculateSum() {
   let incomeSum = income.reduce((acc, item) => {
