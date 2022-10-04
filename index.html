@@ -57,9 +57,11 @@
         
         <div class="col border border-white pt-3">WYDATKI
             <div class="row border-bottom border-white">
+                <form class="row" id="expense-form">
                 <div class="col mt-3 mb-3"><input id="name-input-expense" type="text" class="form-control" placeholder="Nazwa wydatku" aria-label="Nazwa-przychodu" aria-describedby="addon-wrapping"></div>
                 <div class="col mt-3 mb-3"><input id="amount-input-expense" type="number" min="1" max="999999" class="amount-input form-control" placeholder="Kwota" aria-label="Kwota" aria-describedby="addon-wrapping"></div>
                 <div class="col mt-3 mb-3"><button id="add-btn-expense" type="submit" class="add-btn btn btn-outline-light">Dodaj</button></div>  
+                </form>
             </div>
             <ul class="list-group" id="un-list-exp">
             <!-- <div class="row">
@@ -87,4 +89,5 @@
 
     <script src="index.js"></script> 
     </body>
+    
 </html>
