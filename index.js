@@ -1,4 +1,6 @@
 let nameIncome = document.querySelector("#name-input");
+let amountCostExpense = document.querySelector("#amount-input-expense");
+let nameExpense = document.querySelector("#name-input-expense");
 let amountCost = document.querySelector("#amount-input");
 let restSum = document.querySelector("#rest-sum");
 let unorderedListIn = document.querySelector("#un-list-in");
@@ -24,8 +26,8 @@ incomeForm.addEventListener("submit", function (event) {
 expenseForm.addEventListener("submit", function (event) {
   event.preventDefault();
   let addItems = {
-    name: nameIncome.value,
-    amount: amountCost.value,
+    name: nameExpense.value,
+    amount: amountCostExpense.value,
     id: Math.random(),
   };
   expense.push(addItems);
@@ -99,7 +101,7 @@ function addList(type) {
     );
     boxForButtons.appendChild(saveButton);
     boxForButtons.appendChild(cancelButton);
-    calculateSum();
+    calculateSum(type);
 
     list.appendChild(li);
     const itemNameAmount = itemNameValue.textContent;
@@ -112,7 +114,7 @@ function addList(type) {
       cancelButton.classList.remove("display-none");
       itemName.setAttribute("contenteditable", "true");
       itemNameValue.setAttribute("contenteditable", "true");
-      calculateSum();
+      calculateSum(type);
     });
 
     saveButton.addEventListener("click", function () {
@@ -132,7 +134,7 @@ function addList(type) {
           : element
       );
       type === "income" ? (income = newArr) : (expense = newArr);
-      calculateSum();
+      calculateSum(type);
     });
 
     cancelButton.addEventListener("click", function () {
@@ -146,7 +148,9 @@ function addList(type) {
       itemNameValue.textContent = itemNameAmount;
     });
 
-    deleteButton.addEventListener("click", (event) => deleteItem(item, event));
+    deleteButton.addEventListener("click", (event) =>
+      deleteItem(item, event, type, source)
+    );
 
     // let deleteButtonOnClick = document.createAttribute("onclick");
     // deleteButtonOnClick.value = "deleteItem(this)";
@@ -154,24 +158,38 @@ function addList(type) {
   });
 }
 
-function deleteItem(item, event) {
+function deleteItem(item, event, type, source) {
   //  item.parentNode.parentNode.remove();
   event.preventDefault();
   console.log(item);
-  income = income.filter((element) => element.id !== item.id);
+  const newArr = source.filter((element) => element.id !== item.id);
+  type === "income" ? (income = newArr) : (expense = newArr);
   addList();
-  calculateSum();
+  calculateSum(type);
 }
 
 function editItem(item) {}
 
-function calculateSum() {
-  let incomeSum = income.reduce((acc, item) => {
-    return Number(acc) + Number(item.amount);
-  }, 0);
-  document.getElementById("sum-income").innerHTML = incomeSum;
+function calculateSum(type) {
+  if (type === "income") {
+    let incomeSum = income.reduce((acc, item) => {
+      return Number(acc) + Number(item.amount);
+    }, 0);
+    document.getElementById("sum-income").innerHTML = incomeSum;
+  } else {
+    let expenseSum = expense.reduce((acc, item) => {
+      return Number(acc) + Number(item.amount);
+    }, 0);
+    document.getElementById("sum-expense").innerHTML = expenseSum;
+  }
+
+  // let incomeSum = income.reduce((acc, item) => {
+  //   return Number(acc) + Number(item.amount);
+  // }, 0);
+  // document.getElementById("sum-income").innerHTML = incomeSum;
 }
-calculateSum();
+
+// calculateSum();
 
 // te wartosci sa 'na niby' - to taki mój szkic na następne kroki:
 
