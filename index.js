@@ -101,7 +101,7 @@ function addList(type) {
     );
     boxForButtons.appendChild(saveButton);
     boxForButtons.appendChild(cancelButton);
-    calculateSum(type);
+    calculateSum();
 
     list.appendChild(li);
     const itemNameAmount = itemNameValue.textContent;
@@ -134,7 +134,7 @@ function addList(type) {
           : element
       );
       type === "income" ? (income = newArr) : (expense = newArr);
-      calculateSum(type);
+      calculateSum();
     });
 
     cancelButton.addEventListener("click", function () {
@@ -165,7 +165,7 @@ function deleteItem(item, event, type, source) {
   const newArr = source.filter((element) => element.id !== item.id);
   type === "income" ? (income = newArr) : (expense = newArr);
   addList();
-  calculateSum(type);
+  calculateSum();
 }
 
 // tutaj edytowalam:
@@ -182,8 +182,7 @@ function editItem(item) {
   type === "income" ? (income = newArr) : (expense = newArr);
 }
 
-function calculateSum() {
-  // console.log(income);
+function calculateSum(difference) {
   let incomeSum = income.reduce((acc, item) => {
     return Number(acc) + Number(item.amount);
   }, 0);
@@ -195,7 +194,45 @@ function calculateSum() {
   document.getElementById("sum-expense").innerHTML = expenseSum;
 
   calculateDifference(incomeSum, expenseSum);
+
+  showText(incomeSum, expenseSum, difference);
 }
+
+function calculateDifference(incomeSum, expenseSum) {
+  let difference = incomeSum - expenseSum;
+  return difference;
+  // console.log(difference);
+}
+
+function showText(incomeSum, expenseSum, difference) {
+  if (incomeSum > expenseSum) {
+    document.getElementById(
+      "rest-sum"
+    ).innerHTML = `Możesz jeszcze wydać ${difference} złotych.`;
+  } else if (difference === 0) {
+    document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
+  } else if (difference < 0) {
+    document.getElementById(
+      "rest-sum"
+    ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference} złotych.`;
+  }
+}
+
+// function showText() {
+//   if (amountCost.value > amountCostExpense.value) {
+//     document.getElementById(
+//       "rest-sum"
+//     ).innerHTML = `Możesz jeszcze wydać ${difference.value} złotych.`;
+//   } else if (amountCost.value && amountCostExpense.value === 0) {
+//     document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
+//   } else (difference.value < 0) {
+//     document.getElementById(
+//       "rest-sum"
+//     ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference.value} złotych.`;
+//   }
+// }
+
+// showText();
 
 // function calculateSum(type) {
 //   // console.log(income);
@@ -211,47 +248,3 @@ function calculateSum() {
 //      document.getElementById("sum-expense").innerHTML = expenseSum;
 //    }
 // }
-
-function calculateDifference(incomeSum, expenseSum) {
-  let difference = incomeSum - expenseSum;
-  // console.log(incomeSum);
-  console.log(difference);
-}
-
-// function calculateDifference(incomeSum, expenseSum) {
-//   let difference = incomeSum - expenseSum;
-//   console.log(incomeSum);
-//   console.log(difference);
-// }
-
-// function showText() {
-//   if (amountCost.value > amountCostExpense.value) {
-//     document.getElementById(
-//       "rest-sum"
-//     ).innerHTML = `Możesz jeszcze wydać ${difference.value} złotych.`;
-//   } else if (amountCost.value && amountCostExpense.value === 0) {
-//     document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
-//   } else (difference.value < 0) {
-//     document.getElementById(
-//       "rest-sum"
-//     ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference.value} złotych.`;
-//   }
-// }
-
-// showText();
-
-// function showText() {
-//   if (amountCost.value > amountCostExpense.value) {
-//     document.getElementById(
-//       "rest-sum"
-//     ).innerHTML = `Możesz jeszcze wydać ${difference.value} złotych.`;
-//   } else if (amountCost.value && amountCostExpense.value === 0) {
-//     document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
-//   } else (difference.value < 0) {
-//     document.getElementById(
-//       "rest-sum"
-//     ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference.value} złotych.`;
-//   }
-// }
-
-// showText();
