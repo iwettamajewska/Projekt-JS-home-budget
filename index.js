@@ -114,7 +114,7 @@ function addList(type) {
       cancelButton.classList.remove("display-none");
       itemName.setAttribute("contenteditable", "true");
       itemNameValue.setAttribute("contenteditable", "true");
-      calculateSum(type);
+      // calculateSum(type)
     });
 
     saveButton.addEventListener("click", function () {
@@ -161,16 +161,29 @@ function addList(type) {
 function deleteItem(item, event, type, source) {
   //  item.parentNode.parentNode.remove();
   event.preventDefault();
-  console.log(item);
+  // console.log(item);
   const newArr = source.filter((element) => element.id !== item.id);
   type === "income" ? (income = newArr) : (expense = newArr);
   addList();
   calculateSum(type);
 }
 
-function editItem(item) {}
+// tutaj edytowalam:
+function editItem(item) {
+  const newArr = source.map((element) =>
+    element.id === item.id
+      ? {
+          ...element,
+          name: itemName.textContent,
+          amount: itemNameValue.textContent,
+        }
+      : element
+  );
+  type === "income" ? (income = newArr) : (expense = newArr);
+}
 
 function calculateSum(type) {
+  // console.log(income);
   if (type === "income") {
     let incomeSum = income.reduce((acc, item) => {
       return Number(acc) + Number(item.amount);
@@ -182,50 +195,49 @@ function calculateSum(type) {
     }, 0);
     document.getElementById("sum-expense").innerHTML = expenseSum;
   }
-
-  // let incomeSum = income.reduce((acc, item) => {
-  //   return Number(acc) + Number(item.amount);
-  // }, 0);
-  // document.getElementById("sum-income").innerHTML = incomeSum;
 }
 
-// calculateSum();
+function calculateDifference(incomeSum, expenseSum) {
+  let difference = incomeSum - expenseSum;
+  console.log(incomeSum);
+  console.log(difference);
+}
+calculateDifference();
 
-// te wartosci sa 'na niby' - to taki mój szkic na następne kroki:
-
-// function calculateSumExpense() {
-//   let expensSum = outcome.reduce((acc, item) => {
-//   return Number(acc) + Number(item.amount);
-//   }, 0);
-//   document.getElementById("sum-income").innerHTML =  expenseSum;
-//   }
-//   calculateSumExpense();
-
-// let difference = calculateSum - calculateSumExpense;
-
-// const showText() {
-//  if (calculateSum > expenseSum) {
-//    “Możesz jeszcze wydać {difference.value} złotych”.
-//  } elsfe if (calculateSum && expenseSum === 0) {
-//    “Bilans wynosi zero”
-//  } else if (difference < 0) {
-//    “Bilans jest ujemny. Jesteś na minusie XXX złotych”.
-//  }
-//  document.getElementById("rest-sum").innerHTML =  incomeSum;
+// function calculateDifference(incomeSum, expenseSum) {
+//   let difference = incomeSum - expenseSum;
+//   console.log(incomeSum);
+//   console.log(difference);
 // }
 
-/// zrob sobie z tego notatkę:
-
-// function createModal() {
-//     modal.classList.add('span-editable-modal');
-//     const modalInput = document.createElement('input');
-//     modalInput.classList.add('input-editable-modal');
-//     const modalText = event.target.textContent;
-//     modalInput.value = modalText;
-//     const saveButton = document.createElement('button');
-//     saveButton.classList.add('save-btn')
-//     saveButton.textContent = 'Zapisz';
-//     modal.appendChild(modalInput);
-//     modal.appendChild(saveButton);
-//     return modal;
+// function showText() {
+//   if (amountCost.value > amountCostExpense.value) {
+//     document.getElementById(
+//       "rest-sum"
+//     ).innerHTML = `Możesz jeszcze wydać ${difference.value} złotych.`;
+//   } else if (amountCost.value && amountCostExpense.value === 0) {
+//     document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
+//   } else (difference.value < 0) {
+//     document.getElementById(
+//       "rest-sum"
+//     ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference.value} złotych.`;
 //   }
+// }
+
+// showText();
+
+// function showText() {
+//   if (amountCost.value > amountCostExpense.value) {
+//     document.getElementById(
+//       "rest-sum"
+//     ).innerHTML = `Możesz jeszcze wydać ${difference.value} złotych.`;
+//   } else if (amountCost.value && amountCostExpense.value === 0) {
+//     document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
+//   } else (difference.value < 0) {
+//     document.getElementById(
+//       "rest-sum"
+//     ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference.value} złotych.`;
+//   }
+// }
+
+// showText();
