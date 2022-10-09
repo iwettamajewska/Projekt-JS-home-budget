@@ -199,10 +199,11 @@ function calculateSum(type) {
 
 function calculateDifference(incomeSum, expenseSum) {
   let difference = incomeSum - expenseSum;
-  console.log(incomeSum);
+  // console.log(incomeSum);
   console.log(difference);
 }
-calculateDifference();
+
+calculateDifference(income, expense);
 
 // function calculateDifference(incomeSum, expenseSum) {
 //   let difference = incomeSum - expenseSum;
