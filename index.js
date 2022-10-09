@@ -182,28 +182,41 @@ function editItem(item) {
   type === "income" ? (income = newArr) : (expense = newArr);
 }
 
-function calculateSum(type) {
+function calculateSum() {
   // console.log(income);
-  if (type === "income") {
-    let incomeSum = income.reduce((acc, item) => {
-      return Number(acc) + Number(item.amount);
-    }, 0);
-    document.getElementById("sum-income").innerHTML = incomeSum;
-  } else {
-    let expenseSum = expense.reduce((acc, item) => {
-      return Number(acc) + Number(item.amount);
-    }, 0);
-    document.getElementById("sum-expense").innerHTML = expenseSum;
-  }
+  let incomeSum = income.reduce((acc, item) => {
+    return Number(acc) + Number(item.amount);
+  }, 0);
+  document.getElementById("sum-income").innerHTML = incomeSum;
+
+  let expenseSum = expense.reduce((acc, item) => {
+    return Number(acc) + Number(item.amount);
+  }, 0);
+  document.getElementById("sum-expense").innerHTML = expenseSum;
+
+  calculateDifference(incomeSum, expenseSum);
 }
+
+// function calculateSum(type) {
+//   // console.log(income);
+//    if (type === "income") {
+//      let incomeSum = income.reduce((acc, item) => {
+//        return Number(acc) + Number(item.amount);
+//      }, 0);
+//      document.getElementById("sum-income").innerHTML = incomeSum;
+//    } else {
+//      let expenseSum = expense.reduce((acc, item) => {
+//        return Number(acc) + Number(item.amount);
+//      }, 0);
+//      document.getElementById("sum-expense").innerHTML = expenseSum;
+//    }
+// }
 
 function calculateDifference(incomeSum, expenseSum) {
   let difference = incomeSum - expenseSum;
   // console.log(incomeSum);
   console.log(difference);
 }
-
-calculateDifference(income, expense);
 
 // function calculateDifference(incomeSum, expenseSum) {
 //   let difference = incomeSum - expenseSum;
