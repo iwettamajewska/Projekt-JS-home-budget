@@ -1,5 +1,24 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(90, 173, 233);
+}
+
+/* body {
+  background-color: rgb(236, 233, 0);
+} */
+
 .main {
   width: 100%;
+}
+
+html {
+  background-color: rgb(38, 120, 95);
+}
+
+body {
+  background-color: rgb(38, 120, 95);
 }
 
 .bi-wallet-fill {
@@ -7,18 +26,19 @@
 }
 
 .wallet {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
 }
 
-/* .li-btn {
-    background-color: rgb(211, 211, 247);
-} */
+.text-center {
+  font-size: 2rem;
+}
 
-.text-in-list {
-  color: brown;
-  width: 80%;
+/* DLACZEGO MUSZE TO DODAC? GDZIE BLAD?  */
+#income-form,
+#expense-form {
+  margin: 0;
 }
 
 .li-income {
@@ -41,16 +61,35 @@
   padding: 0 40px;
 }
 
-/* .text-in-lis {
-    width: 50%;
-} */
+.btn {
+  width: 70px;
+}
 
-/* .unordered-list {
-    display: flex;
-    justify-content: space-between;
-} */
+.edit-btn,
+.delete-btn,
+.save-btn,
+.cancel-btn {
+  margin: 5px;
+}
 
-/* .li-btn {
-    display: flex;
-    justify-content: space-between;
-} */
+.item-name {
+  width: 40%;
+  /* word-wrap: break-word; */
+}
+
+.text-center {
+  height: 100px;
+  display: inline-block;
+  text-align: center;
+}
+
+#sum-income,
+#sum-expense {
+  font-weight: 700;
+  position: absolute;
+  bottom: 20px;
+}
+
+.relative-position {
+  position: relative;
+}

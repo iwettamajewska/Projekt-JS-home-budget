@@ -146,6 +146,8 @@ function addList(type) {
       itemNameValue.setAttribute("contenteditable", "false");
       itemName.textContent = itemNameVal;
       itemNameValue.textContent = itemNameAmount;
+      calculateSum();
+      addList(type);
     });
 
     deleteButton.addEventListener("click", (event) =>
@@ -164,34 +166,23 @@ function deleteItem(item, event, type, source) {
   // console.log(item);
   const newArr = source.filter((element) => element.id !== item.id);
   type === "income" ? (income = newArr) : (expense = newArr);
-  addList();
+  addList(type);
   calculateSum();
 }
 
 // tutaj edytowalam:
-function editItem(item) {
-  const newArr = source.map((element) =>
-    element.id === item.id
-      ? {
-          ...element,
-          name: itemName.textContent,
-          amount: itemNameValue.textContent,
-        }
-      : element
-  );
-  type === "income" ? (income = newArr) : (expense = newArr);
-}
+function editItem(item) {}
 
 function calculateSum() {
   let incomeSum = income.reduce((acc, item) => {
     return Number(acc) + Number(item.amount);
   }, 0);
-  document.getElementById("sum-income").innerHTML = incomeSum;
+  document.getElementById("sum-income").innerHTML = incomeSum.toFixed(2);
 
   let expenseSum = expense.reduce((acc, item) => {
     return Number(acc) + Number(item.amount);
   }, 0);
-  document.getElementById("sum-expense").innerHTML = expenseSum;
+  document.getElementById("sum-expense").innerHTML = expenseSum.toFixed(2);
 
   const difference = calculateDifference(incomeSum, expenseSum);
   // difference.classList.add("bold");
@@ -210,16 +201,36 @@ function showText(incomeSum, expenseSum, difference) {
   if (incomeSum > expenseSum) {
     document.getElementById(
       "rest-sum"
-    ).innerHTML = `Możesz jeszcze wydać <strong>${difference}</strong> zł.`;
+    ).innerHTML = `Możesz jeszcze wydać <strong>${difference.toFixed(
+      2
+    )}</strong> zł.`;
   } else if (difference === 0) {
-    document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
+    document.getElementById(
+      "rest-sum"
+    ).innerHTML = `Bilans wynosi <strong>zero</strong>`;
   } else if (difference < 0) {
     document.getElementById(
       "rest-sum"
-    ).innerHTML = `Bilans jest ujemny. Jesteś na minusie <strong>${difference}</strong> zł.`;
+    ).innerHTML = `Bilans jest ujemny. Jesteś na minusie <strong>${difference.toFixed(
+      2
+    )}</strong> zł.`;
   }
 }
 
+// CO TU JEST NIE TAK?
+// incomeForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+
+//   //jeżeli wszystko ok to wysyłamy
+//   if (nameIncome.value.length >= 3) {
+//     incomeForm.submit();
+//   } else {
+//     //jeżeli nie to pokazujemy jakieś błędy
+//     alert("Kolego wypełniłeś błędnie nasz super formularz");
+//   }
+// });
+
+////////////////////////////////////////////////
 // function showText() {
 //   if (amountCost.value > amountCostExpense.value) {
 //     document.getElementById(

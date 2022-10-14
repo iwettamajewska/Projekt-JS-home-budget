@@ -26,19 +26,16 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Nazwa strony</title>
+    <title>Budżet domowy</title>
   </head>
 
   <body>
-    <div class="main container p-3 mb-2 bg-success text-white">
+    <div class="main container p-3 mb-2 text-white relative-position">
       <div class="row">
         <img class="wallet" src="img/wallet.png" />
       </div>
       <div class="row">
-        <div
-          class="mx-auto text-center border border-white m-3 p-3"
-          style="width: 400px"
-        >
+        <div class="mx-auto text-center m-3 p-3">
           <span id="rest-sum"></span>
         </div>
       </div>
@@ -51,7 +48,7 @@
                 <input
                   id="name-input"
                   type="text"
-                  pattern="^[a-zA-Z]+$"
+                  maxlength="20"
                   class="name-input form-control"
                   placeholder="Nazwa przychodu"
                   aria-label="Nazwa-przychodu"
@@ -62,9 +59,9 @@
                 <input
                   id="amount-input"
                   type="number"
-                  min="1"
-                  step="1"
-                  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
+                  min="0.01"
+                  step="0.01"
+                  max="999999"
                   class="amount-input form-control"
                   placeholder="Kwota"
                   aria-label="Kwota"
@@ -84,11 +81,13 @@
           </div>
           <ul class="unordered-list" id="un-list-in"></ul>
           <div class="row">
-            <div class="col mb-3 mt-5 pt-5"><span id="sum-income"></span></div>
+            <div class="col mb-3 mt-5 pt-5">
+              <span id="sum-income"></span>
+            </div>
           </div>
         </div>
 
-        <div class="col border border-white pt-3">
+        <div class="col border border-white pt-3 relative-position">
           WYDATKI
           <div class="row border-bottom border-white">
             <form class="row" id="expense-form">
@@ -96,6 +95,8 @@
                 <input
                   id="name-input-expense"
                   type="text"
+                  maxlength="20"
+                  pattern="^[a-zA-Z]+$"
                   class="form-control"
                   placeholder="Nazwa wydatku"
                   aria-label="Nazwa-przychodu"
@@ -107,6 +108,10 @@
                   id="amount-input-expense"
                   type="number"
                   min="1"
+                  min="0.01"
+                  step="0.01"
+                  max="999999"
+                  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
                   max="999999"
                   class="amount-input form-control"
                   placeholder="Kwota"
@@ -127,7 +132,9 @@
           </div>
           <ul class="list-group" id="un-list-exp"></ul>
           <div class="row">
-            <div class="col mb-3 mt-5 pt-5"><span id="sum-expense"></span></div>
+            <div class="col mb-3 mt-5 pt-5">
+              <span id="sum-expense"></span>
+            </div>
           </div>
         </div>
       </div>
