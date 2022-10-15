@@ -118,6 +118,21 @@ function addList(type) {
     });
 
     saveButton.addEventListener("click", function () {
+      if (
+        !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(itemNameAmount)
+        // && type !== number
+      ) {
+        console.log("wprowadź wartości liczbowe");
+        const alert = document.createElement("div");
+        alert.classList.add("alert");
+        alert.textContent = "Wprowadź wartości liczbowe";
+        list.appendChild(alert);
+      }
+
+      // if (/[a-zA-Z]/.test(itemNameValue.textContent)) {
+      //   console.log("działa");
+      // }
+
       editButton.classList.remove("display-none");
       deleteButton.classList.remove("display-none");
       saveButton.classList.add("display-none");

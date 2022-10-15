@@ -30,7 +30,7 @@
   </head>
 
   <body>
-    <div class="main container p-3 mb-2 text-white relative-position">
+    <div class="main container p-3 mb-2 text-white">
       <div class="row">
         <img class="wallet" src="img/wallet.png" />
       </div>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col border border-white pt-3">
+        <div class="col border border-white pt-3 relative-position">
           PRZYCHODY
           <div class="row border-bottom border-white">
             <form class="row" id="income-form">
@@ -48,6 +48,8 @@
                 <input
                   id="name-input"
                   type="text"
+                  required
+                  minlength="1"
                   maxlength="20"
                   class="name-input form-control"
                   placeholder="Nazwa przychodu"
@@ -59,6 +61,7 @@
                 <input
                   id="amount-input"
                   type="number"
+                  required
                   min="0.01"
                   step="0.01"
                   max="999999"
@@ -81,7 +84,7 @@
           </div>
           <ul class="unordered-list" id="un-list-in"></ul>
           <div class="row">
-            <div class="col mb-3 mt-5 pt-5">
+            <div class="col mb-3 mt-5 pt-5 blablabla">
               <span id="sum-income"></span>
             </div>
           </div>
@@ -95,6 +98,8 @@
                 <input
                   id="name-input-expense"
                   type="text"
+                  required
+                  maxlength="20"
                   maxlength="20"
                   pattern="^[a-zA-Z]+$"
                   class="form-control"
@@ -107,11 +112,11 @@
                 <input
                   id="amount-input-expense"
                   type="number"
+                  required
                   min="1"
                   min="0.01"
                   step="0.01"
                   max="999999"
-                  onkeypress="return event.keyCode === 8 || event.charCode >= 48 && event.charCode <= 57"
                   max="999999"
                   class="amount-input form-control"
                   placeholder="Kwota"
