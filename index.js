@@ -164,7 +164,7 @@ function addList(type) {
       //   alert.textContent = "Wprowadź wartości liczbowe";
       //   list.appendChild(alert);
       // } else if (
-      //   /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
+      //   !/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
       //     itemNameValue.textContent
       //   )
       // ) {
