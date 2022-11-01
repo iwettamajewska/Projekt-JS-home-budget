@@ -118,78 +118,86 @@ function addList(type) {
     });
 
     saveButton.addEventListener("click", function () {
-      // ROZWIAZANIE NR 1 (ale nie obsluguje specjalnych znakow specjalnych(jak np.% $), spacji, enetera, poza , i . bo są one mi potrzebne do wartości groszowych)
-      // Tu prawie działa, wyświetla się błąd w consoli w momencie, gdy wprowadzę modyfikacje w nazwie przychodu (itemName.textContent), ale wizualnie działa dobrze. Wada jest też taka, że regex nie obsługuje znaków specjalnych jak np.%$# poza oczywiście , i . , bo one są potrzebne do warości groszowych
-      // if (/[a-zA-Z]/.test(itemNameValue.textContent)) {
-      //   console.log("wprowadź wartości liczbowe");
-      //   const alert = document.createElement("div");
-      //   alert.classList.add("alert");
-      //   alert.textContent = "Wprowadź wartości liczbowe";
-      //   list.appendChild(alert);
-      // } else if (!/[a-zA-Z]/.test(itemNameValue.textContent)) {
-      //   const alert = list.querySelector(".alert");
-      //   list.removeChild(alert);
-      // }
+      const alert = list.querySelector(".alert");
 
-      // ROZWIAZANIE NR 2
-      // tu alert pojawia się gdy modyfikuję wartość przychodu (itemNameValue.textContent) jak i nazwę przychodu (itemName.textContent)  no i generlanie nie działa gorzej niż ten przykład wyżej
-      // if (
-      //   /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
-      //     itemNameValue.textContent
-      //   )
-      // ) {
-      //   console.log("wprowadź wartości liczbowe");
-      //   const alert = document.createElement("div");
-      //   alert.classList.add("alert");
-      //   alert.textContent = "Wprowadź wartości liczbowe";
-      //   list.appendChild(alert);
-      // } else if (
-      //   !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
-      //     itemNameValue.textContent
-      //   )
-      // ) {
-      //   const alert = list.querySelector(".alert");
-      //   list.removeChild(alert);
-      // }
-
-      // ROZWIAZANIE 3 - nie wychodzi mi zrobienie zaprzeczenia regex
-      // if (
-      //   /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
-      //     itemNameValue.textContent
-      //   )
-      // ) {
-      //   console.log("wprowadź wartości liczbowe");
-      //   const alert = document.createElement("div");
-      //   alert.classList.add("alert");
-      //   alert.textContent = "Wprowadź wartości liczbowe";
-      //   list.appendChild(alert);
-      // } else if (
-      //   !/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
-      //     itemNameValue.textContent
-      //   )
-      // ) {
-      //   const alert = list.querySelector(".alert");
-      //   list.removeChild(alert);
-      // }
-
-      editButton.classList.remove("display-none");
-      deleteButton.classList.remove("display-none");
-      saveButton.classList.add("display-none");
-      cancelButton.classList.add("display-none");
-      itemName.setAttribute("contenteditable", "false");
-      itemNameValue.setAttribute("contenteditable", "false");
-      const newArr = source.map((element) =>
-        element.id === item.id
-          ? {
-              ...element,
-              name: itemName.textContent,
-              amount: itemNameValue.textContent,
-            }
-          : element
-      );
-      type === "income" ? (income = newArr) : (expense = newArr);
-      calculateSum();
+      if (
+        !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
+          itemNameValue.textContent
+        )
+      ) {
+        console.log("wprowadź wartości liczbowe");
+        if (!alert) {
+          const alert = document.createElement("div");
+          alert.classList.add("alert");
+          alert.textContent = "Wprowadź wartości liczbowe";
+          list.appendChild(alert);
+        }
+      } else {
+        if (alert) {
+          list.removeChild(alert);
+        }
+        editButton.classList.remove("display-none");
+        deleteButton.classList.remove("display-none");
+        saveButton.classList.add("display-none");
+        cancelButton.classList.add("display-none");
+        itemName.setAttribute("contenteditable", "false");
+        itemNameValue.setAttribute("contenteditable", "false");
+        const newArr = source.map((element) =>
+          element.id === item.id
+            ? {
+                ...element,
+                name: itemName.textContent.trim(),
+                amount: itemNameValue.textContent.trim(),
+              }
+            : element
+        );
+        type === "income" ? (income = newArr) : (expense = newArr);
+        calculateSum();
+      }
     });
+
+    // /[a-zA-Z]/
+
+    // ROZWIAZANIE NR 2
+    // tu alert pojawia się gdy modyfikuję wartość przychodu (itemNameValue.textContent) jak i nazwę przychodu (itemName.textContent)  no i generlanie nie działa gorzej niż ten przykład wyżej
+    // if (
+    //   /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
+    //     itemNameValue.textContent
+    //   )
+    // ) {
+    //   console.log("wprowadź wartości liczbowe");
+    //   const alert = document.createElement("div");
+    //   alert.classList.add("alert");
+    //   alert.textContent = "Wprowadź wartości liczbowe";
+    //   list.appendChild(alert);
+    // } else if (
+    //   !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
+    //     itemNameValue.textContent
+    //   )
+    // ) {
+    //   const alert = list.querySelector(".alert");
+    //   list.removeChild(alert);
+    // }
+
+    // ROZWIAZANIE 3 - nie wychodzi mi zrobienie zaprzeczenia regex
+    // if (
+    //   /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
+    //     itemNameValue.textContent
+    //   )
+    // ) {
+    //   console.log("wprowadź wartości liczbowe");
+    //   const alert = document.createElement("div");
+    //   alert.classList.add("alert");
+    //   alert.textContent = "Wprowadź wartości liczbowe";
+    //   list.appendChild(alert);
+    // } else if (
+    //   !/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
+    //     itemNameValue.textContent
+    //   )
+    // ) {
+    //   const alert = list.querySelector(".alert");
+    //   list.removeChild(alert);
+    // }
 
     cancelButton.addEventListener("click", function () {
       editButton.classList.remove("display-none");

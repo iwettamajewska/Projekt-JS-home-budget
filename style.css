@@ -14,11 +14,11 @@
 }
 
 html {
-  background-color: rgb(38, 120, 95);
+  background-color: rgb(90, 173, 233);
 }
 
 body {
-  background-color: rgb(38, 120, 95);
+  background-color: rgb(90, 173, 233);
 }
 
 .bi-wallet-fill {
@@ -29,6 +29,8 @@ body {
   width: 150px;
   height: 150px;
   object-fit: contain;
+  border: 1px solid white;
+  border-radius: 50%;
 }
 
 .text-center {
