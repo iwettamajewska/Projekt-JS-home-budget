@@ -119,7 +119,6 @@ function addList(type) {
 
     saveButton.addEventListener("click", function () {
       const alert = list.querySelector(".alert");
-
       if (
         !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
           itemNameValue.textContent
