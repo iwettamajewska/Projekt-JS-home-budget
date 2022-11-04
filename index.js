@@ -121,11 +121,7 @@ function addList(type) {
       const alert = list.querySelector(".alert");
       console.log(itemName.textContent);
       console.log(itemNameValue.textContent);
-      if (
-        !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
-          itemNameValue.textContent
-        )
-      ) {
+      if (!/^[0-9]\d*(\.\d+)?$/.test(Number(itemNameValue.textContent))) {
         console.log("wprowadź wartości liczbowe");
         if (!alert) {
           const alert = document.createElement("div");
