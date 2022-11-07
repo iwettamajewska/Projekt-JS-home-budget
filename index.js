@@ -52,14 +52,9 @@ function addList(type) {
     const editButton = document.createElement("button");
     const deleteButton = document.createElement("button");
     editButton.textContent = "Edytuj";
-    editButton.classList.add("edit-btn", "li-btn", "btn", "btn-outline-light");
+    editButton.classList.add("edit-btn", "li-btn", "btn", "btn-light");
     deleteButton.textContent = "Usuń";
-    deleteButton.classList.add(
-      "delete-btn",
-      "li-btn",
-      "btn",
-      "btn-outline-light"
-    );
+    deleteButton.classList.add("delete-btn", "li-btn", "btn", "btn-light");
     let itemName = document.createElement("span");
     itemName.classList.add("item-name");
     let itemNameValue = document.createElement("span");
@@ -89,7 +84,7 @@ function addList(type) {
       "li-btn",
       "display-none",
       "btn",
-      "btn-outline-light"
+      "btn-light"
     );
     cancelButton.textContent = "Anuluj";
     cancelButton.classList.add(
@@ -97,7 +92,7 @@ function addList(type) {
       "li-btn",
       "display-none",
       "btn",
-      "btn-outline-light"
+      "btn-light"
     );
     boxForButtons.appendChild(saveButton);
     boxForButtons.appendChild(cancelButton);

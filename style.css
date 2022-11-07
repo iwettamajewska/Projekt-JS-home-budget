@@ -2,7 +2,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: rgb(90, 173, 233);
+  background-color: rgb(141, 203, 247);
+  /* background-color: rgb(255, 255, 255); */
+  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  /* color: black; */
 }
 
 /* body {
@@ -14,11 +18,13 @@
 }
 
 html {
-  background-color: rgb(10, 113, 187);
+  /* background-color: rgb(10, 113, 187); */
+  background-color: rgb(141, 203, 247);
 }
 
 body {
-  background-color: rgb(10, 113, 187);
+  /* background-color: rgb(10, 113, 187); */
+  background-color: rgb(141, 203, 247);
 }
 
 .bi-wallet-fill {
