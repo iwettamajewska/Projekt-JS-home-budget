@@ -116,7 +116,7 @@ function addList(type) {
       const alert = list.querySelector(".alert");
       console.log(itemName.textContent);
       console.log(itemNameValue.textContent);
-      if (!/^[0-9]\d*(\.\d+)?$/.test(Number(itemNameValue.textContent))) {
+      if (!/^(\d+(?:[\.\,]\d{2})?)$/.test(Number(itemNameValue.textContent))) {
         console.log("wprowadź wartości liczbowe");
         if (!alert) {
           const alert = document.createElement("div");
@@ -147,6 +147,9 @@ function addList(type) {
         calculateSum();
       }
     });
+
+    // !/^[0-9]\d*(\.\d+)?$/ <- to bylo najblizsze
+    // /^(\d+(?:[\.\,]\d{2})?)$/;
 
     // /[a-zA-Z]/
 
