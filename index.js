@@ -116,7 +116,7 @@ function addList(type) {
       const alert = list.querySelector(".alert");
       console.log(itemName.textContent);
       console.log(itemNameValue.textContent);
-      if (!/^(\d+(?:[\.\,]\d{2})?)$/.test(Number(itemNameValue.textContent))) {
+      if (!/^(\d+(?:[\.\,]\d{2})?)$/.test(itemNameValue.textContent)) {
         console.log("wprowadź wartości liczbowe");
         if (!alert) {
           const alert = document.createElement("div");
