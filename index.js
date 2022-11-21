@@ -40,10 +40,6 @@ function addList(type) {
 
   list.innerText = "";
 
-  // type === "income"
-  //   ? (unorderedListIn.innerText = "")
-  //   : (unorderedListExp.innerText = "");
-
   const source = type === "income" ? income : expense;
 
   source.forEach((item) => {
@@ -69,7 +65,7 @@ function addList(type) {
     li.appendChild(currency);
 
     const boxForButtons = document.createElement("span");
-    boxForButtons.classList.add("boxButtons");
+    boxForButtons.classList.add("box-buttons");
     li.appendChild(boxForButtons);
     boxForButtons.appendChild(editButton);
     boxForButtons.appendChild(deleteButton);
@@ -109,15 +105,12 @@ function addList(type) {
       cancelButton.classList.remove("display-none");
       itemName.setAttribute("contenteditable", "true");
       itemNameValue.setAttribute("contenteditable", "true");
-      // console.log(itemNameAmount.trim());
     });
 
     saveButton.addEventListener("click", function () {
       const alert = list.querySelector(".alert");
-      console.log(itemName.textContent);
-      console.log(itemNameValue.textContent);
+
       if (!/^(\d+(?:[\.\,]\d{2})?)$/.test(itemNameValue.textContent)) {
-        console.log("wprowadź wartości liczbowe");
         if (!alert) {
           const alert = document.createElement("div");
           alert.classList.add("alert");
@@ -148,52 +141,6 @@ function addList(type) {
       }
     });
 
-    // !/^[0-9]\d*(\.\d+)?$/ <- to bylo najblizsze
-    // /^(\d+(?:[\.\,]\d{2})?)$/;
-
-    // /[a-zA-Z]/
-
-    // ROZWIAZANIE NR 2
-    // tu alert pojawia się gdy modyfikuję wartość przychodu (itemNameValue.textContent) jak i nazwę przychodu (itemName.textContent)  no i generlanie nie działa gorzej niż ten przykład wyżej
-    // if (
-    //   /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
-    //     itemNameValue.textContent
-    //   )
-    // ) {
-    //   console.log("wprowadź wartości liczbowe");
-    //   const alert = document.createElement("div");
-    //   alert.classList.add("alert");
-    //   alert.textContent = "Wprowadź wartości liczbowe";
-    //   list.appendChild(alert);
-    // } else if (
-    //   !/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/.test(
-    //     itemNameValue.textContent
-    //   )
-    // ) {
-    //   const alert = list.querySelector(".alert");
-    //   list.removeChild(alert);
-    // }
-
-    // ROZWIAZANIE 3 - nie wychodzi mi zrobienie zaprzeczenia regex
-    // if (
-    //   /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
-    //     itemNameValue.textContent
-    //   )
-    // ) {
-    //   console.log("wprowadź wartości liczbowe");
-    //   const alert = document.createElement("div");
-    //   alert.classList.add("alert");
-    //   alert.textContent = "Wprowadź wartości liczbowe";
-    //   list.appendChild(alert);
-    // } else if (
-    //   !/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
-    //     itemNameValue.textContent
-    //   )
-    // ) {
-    //   const alert = list.querySelector(".alert");
-    //   list.removeChild(alert);
-    // }
-
     cancelButton.addEventListener("click", function () {
       editButton.classList.remove("display-none");
       deleteButton.classList.remove("display-none");
@@ -210,25 +157,17 @@ function addList(type) {
     deleteButton.addEventListener("click", (event) =>
       deleteItem(item, event, type, source)
     );
-
-    // let deleteButtonOnClick = document.createAttribute("onclick");
-    // deleteButtonOnClick.value = "deleteItem(this)";
-    // deleteButton.setAttributeNode(deleteButtonOnClick);
   });
 }
 
 function deleteItem(item, event, type, source) {
-  //  item.parentNode.parentNode.remove();
   event.preventDefault();
-  // console.log(item);
+
   const newArr = source.filter((element) => element.id !== item.id);
   type === "income" ? (income = newArr) : (expense = newArr);
   addList(type);
   calculateSum();
 }
-
-// tutaj edytowalam:
-function editItem(item) {}
 
 function calculateSum() {
   let incomeSum = income.reduce((acc, item) => {
@@ -242,95 +181,30 @@ function calculateSum() {
   document.getElementById("sum-expense").innerHTML = expenseSum.toFixed(2);
 
   const difference = calculateDifference(incomeSum, expenseSum);
-  // difference.classList.add("bold");
+
   showText(incomeSum, expenseSum, difference);
 }
 
 function calculateDifference(incomeSum, expenseSum) {
   return incomeSum - expenseSum;
-  // console.log(difference);
 }
-
-// let difference = incomeSum - expenseSum;
-// return difference;
 
 function showText(incomeSum, expenseSum, difference) {
   if (incomeSum > expenseSum) {
     document.getElementById(
       "rest-sum"
-    ).innerHTML = `Możesz jeszcze wydać <strong>${difference.toFixed(
+    ).innerHTML = `Możesz jeszcze wydać <strong class="rest-sum-number">${difference.toFixed(
       2
     )}</strong> zł.`;
   } else if (difference === 0) {
     document.getElementById(
       "rest-sum"
-    ).innerHTML = `Bilans wynosi <strong>zero</strong>`;
+    ).innerHTML = `Bilans wynosi <strong class="rest-sum-number">zero</strong>`;
   } else if (difference < 0) {
     document.getElementById(
       "rest-sum"
-    ).innerHTML = `Bilans jest ujemny. Jesteś na minusie <strong>${difference.toFixed(
+    ).innerHTML = `Bilans jest ujemny. Jesteś na minusie <strong class="rest-sum-number">${difference.toFixed(
       2
     )}</strong> zł.`;
   }
 }
-
-// CO TU JEST NIE TAK?
-// incomeForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-
-//   //jeżeli wszystko ok to wysyłamy
-//   if (nameIncome.value.length >= 3) {
-//     incomeForm.submit();
-//   } else {
-//     //jeżeli nie to pokazujemy jakieś błędy
-//     alert("Kolego wypełniłeś błędnie nasz super formularz");
-//   }
-// });
-
-////////////////////////////////////////////////
-// function showText() {
-//   if (amountCost.value > amountCostExpense.value) {
-//     document.getElementById(
-//       "rest-sum"
-//     ).innerHTML = `Możesz jeszcze wydać ${difference.value} złotych.`;
-//   } else if (amountCost.value && amountCostExpense.value === 0) {
-//     document.getElementById("rest-sum").innerHTML = `Bilans wynosi zero`;
-//   } else (difference.value < 0) {
-//     document.getElementById(
-//       "rest-sum"
-//     ).innerHTML = `Bilans jest ujemny. Jesteś na minusie ${difference.value} złotych.`;
-//   }
-// }
-
-// showText();
-
-// function calculateSum(type) {
-//   // console.log(income);
-//    if (type === "income") {
-//      let incomeSum = income.reduce((acc, item) => {
-//        return Number(acc) + Number(item.amount);
-//      }, 0);
-//      document.getElementById("sum-income").innerHTML = incomeSum;
-//    } else {
-//      let expenseSum = expense.reduce((acc, item) => {
-//        return Number(acc) + Number(item.amount);
-//      }, 0);
-//      document.getElementById("sum-expense").innerHTML = expenseSum;
-//    }
-// }
-
-// if (
-//   (!/^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:(\.|,)\d+)?$/).test(
-//     itemNameValue.textContent
-//   )
-// ) {
-//   console.log("wprowadź wartości liczbowe");
-//   const alert = document.createElement("div");
-//   alert.classList.add("alert");
-//   alert.textContent = "Wprowadź wartości liczbowe";
-//   list.appendChild(alert);
-// }
-
-// if (/[a-zA-Z]/.test(itemNameValue.textContent)) {
-//   console.log("działa");
-// }
