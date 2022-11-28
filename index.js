@@ -1,4 +1,4 @@
-let nameIncome = document.querySelector("#name-input");
+let nameIncome = document.querySelector("#name-input-income");
 let amountCostExpense = document.querySelector("#amount-input-expense");
 let nameExpense = document.querySelector("#name-input-expense");
 let amountCost = document.querySelector("#amount-input");
